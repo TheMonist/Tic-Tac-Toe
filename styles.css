@@ -4,32 +4,35 @@
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 5px;
-    height: 70vh;
-    width: 70vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
 }
+
 header {
     border-bottom: 2px solid black;
     width: 100%;
-    margin-bottom: 5px;
+    margin: 1rem;
     text-align: center;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
 }
 
 footer {
     border-top: 2px solid black;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 1rem;
     text-align: center;
 }
 
 .board {
     display: grid;
-    gap: 1px;
+    gap: 5px;
     grid-template-columns: repeat(3, 1fr);
     height: 60vh;
     width: 45vw;
