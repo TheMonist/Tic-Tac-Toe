@@ -10,8 +10,8 @@ const player = (name, symbol) => {
     return {name, symbol}
 };
 
-const player1 = player("Player1", "X");
-const player2 = player("Player2", "O");
+const player1 = player("Player 1", "X");
+const player2 = player("Player 2", "O");
 
 //Game Logic
 const playGame = (() => {
@@ -22,8 +22,26 @@ const playGame = (() => {
     const move = (e) => {
         const targetArrayIndex = board[`${e.target.id}`];
         if (symbol == '') {
-            symbol = player1.symbol 
+            symbol = player1.symbol;
+            if (targetArrayIndex === '') {
+                board.splice(`${e.target.id}`,1, symbol)
+            }; 
+        }else if (symbol === player1.symbol) {
+            symbol = player2.symbol; 
+            winningPlayer = player2.name;
+            if (targetArrayIndex === '') {
+                board.splice(`${e.target.id}`,1, symbol)
+            }; 
+        }else if (symbol === player2.symbol) {
+            symbol = player1.symbol;
+            winningPlayer = player1.name;
+            if (targetArrayIndex === '') {
+                board.splice(`${e.target.id}`,1, symbol)
+            };
         }
+        const {renderMove} = renderAndRest;
+        renderMove();
+        checkWinner();
     }
 
     //function to check the winner
@@ -103,7 +121,32 @@ const playGame = (() => {
 
     addClick();
 
-    return{addClick}
+    return {addClick}
 })();
 
 //DOM Manipulation and GUI For HTML
+const renderAndRest = (() => {
+    const {board} = gameBoard;
+    const {addClick} = playGame;
+
+    function renderMove() {
+        for (let i = 0; i < board.length; i++) {
+            const targetBox = document.getElementById(`${i}`);
+            targetBox.textContent = board[i];
+        }
+    }
+
+    const resetBtn = document.getElementById("resetBtn");
+
+    resetBtn.addEventListener('click', () => {
+        for (let i = 0; i < board.length; i++) {
+            board[i] = "";
+        }
+
+        winner.textConent = "May The Best Player Win!";
+        addClick();
+        renderMove();
+    });
+
+    return {renderMove}
+})();
