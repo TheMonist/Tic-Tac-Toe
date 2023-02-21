@@ -1,5 +1,4 @@
 //Module For Game Board
-//maybe add a foreach loop here to have user change size?
 const gameBoard = (() => {
     const board = ['', '', '', '', '', '', '', '', ''];
     return {board};
